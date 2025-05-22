@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SkyWay Airlines | Book Your Flight</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    :root {
+      --primary-color: #4361ee;
+      --secondary-color: #3f37c9;
+      --accent-color: #4cc9f0;
+      --light-bg: #f8f9fa;
+      --dark-text: #212529;
+    }
+    
+    body {
+      background-color: #f8f9fa;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: var(--dark-text);
+      min-height: 100vh;
+    }
+
+    .navbar {
+      background-color: var(--primary-color);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-brand {
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: white;
+    }
+
+    .navbar-brand i {
+      margin-right: 0.5rem;
+    }
+
+    .main-container {
+      padding: 3rem 0;
+    }
+
+    .page-title {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--primary-color);
+      text-align: center;
+    }
+    
+    .page-subtitle {
+      text-align: center;
+      color: #6c757d;
+      margin-bottom: 2rem;
+    }
+
+    .booking-container {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .booking-card {
+      background-color: white;
+      border-radius: 20px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .flight-summary {
+      background-color: rgba(67, 97, 238, 0.05);
+      border-radius: 15px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      border: 1px dashed rgba(67, 97, 238, 0.3);
+    }
+
+    .flight-title {
+      font-weight: 600;
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .flight-title i {
+      margin-right: 0.5rem;
+    }
+
+    .flight-detail {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .flight-detail i {
+      width: 20px;
+      margin-right: 0.75rem;
+      color: var(--primary-color);
+    }
+
+    .flight-detail span {
+      color: #495057;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+      font-weight: 500;
+      color: #495057;
+      margin-bottom: 0.5rem;
+    }
+
+    .form-control {
+      padding: 0.8rem 1rem;
+      border-radius: 10px;
+      border: 1px solid #ced4da;
+      transition: all 0.3s;
+    }
+
+    .form-control:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 0.25rem rgba(67, 97, 238, 0.25);
+    }
+
+    .btn-pay {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 1rem 1.5rem;
+      border-radius: 10px;
+      font-weight: 600;
+      width: 100%;
+      transition: all 0.3s;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .btn-pay:hover {
+      background-color: var(--secondary-color);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+    }
+
+    .price-summary {
+      background-color: #f8f9fa;
+      padding: 1.5rem;
+      border-radius: 15px;
+      margin-top: 2rem;
+    }
+
+    .price-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.75rem;
+    }
+
+    .price-row.total {
+      padding-top: 0.75rem;
+      border-top: 1px solid #dee2e6;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    .back-btn {
+      margin-bottom: 1rem;
+      display: inline-block;
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .back-btn:hover {
+      color: var(--secondary-color);
+    }
+
+    .back-btn i {
+      margin-right: 0.5rem;
+    }
+    
+    .payment-info {
+      color: #6c757d;
+      font-size: 0.9rem;
+      text-align: center;
+      margin-top: 1rem;
+    }
+    
+    .payment-info i {
+      margin-right: 0.25rem;
+      color: var(--primary-color);
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <i class="fas fa-plane"></i> SkyWay
+      </a>
+    </div>
+  </nav>
+
+  <div class="container main-container">
+    <a href="flights.html" class="back-btn">
+      <i class="fas fa-arrow-left"></i> Back to Flights
+    </a>
+    
+    <div class="booking-container">
+      <h1 class="page-title">Complete Your Booking</h1>
+      <p class="page-subtitle">Fill in your details to secure your flight</p>
+      
+      <div class="booking-card">
+        <div class="flight-summary">
+          <h5 class="flight-title">
+            <i class="fas fa-info-circle"></i> Flight Summary
+          </h5>
+          <div class="flight-detail">
+            <i class="fas fa-plane-departure"></i>
+            <span id="flight-destination">Loading flight details...</span>
+          </div>
+          <div class="flight-detail">
+            <i class="fas fa-calendar-alt"></i>
+            <span id="flight-date"></span>
+          </div>
+          <div class="flight-detail">
+            <i class="fas fa-clock"></i>
+            <span id="flight-time"></span>
+          </div>
+        </div>
+        
+        <form action="create_checkout_session.php" method="POST">
+          <input type="hidden" id="flight_id" name="flight_id" value="">
+          <input type="hidden" name="amount" value="500000">
+          
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="passenger_name" class="form-label">Passenger Name</label>
+                <input type="text" class="form-control" id="passenger_name" name="passenger_name" placeholder="Enter your full name" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="passenger_email" class="form-label">Email Address</label>
+                <input type="email" class="form-control" id="passenger_email" name="passenger_email" placeholder="Enter your email" required>
+              </div>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="seat_number" class="form-label">Preferred Seat</label>
+                <select class="form-select" id="seat_number" name="seat_number" required>
+                  <option value="" selected disabled>Select a seat</option>
+                  <option value="A1">A1 - Window</option>
+                  <option value="B1">B1 - Middle</option>
+                  <option value="C1">C1 - Aisle</option>
+                  <option value="A2">A2 - Window</option>
+                  <option value="B2">B2 - Middle</option>
+                  <option value="C2">C2 - Aisle</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="meal_preference" class="form-label">Meal Preference</label>
+                <select class="form-select" id="meal_preference" name="meal_preference">
+                  <option value="Regular">Regular</option>
+                  <option value="Vegetarian">Vegetarian</option>
+                  <option value="Vegan">Vegan</option>
+                  <option value="Kosher">Kosher</option>
+                  <option value="Halal">Halal</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          
+          <div class="price-summary">
+            <div class="price-row">
+              <span>Base Fare</span>
+              <span>₹4,000.00</span>
+            </div>
+            <div class="price-row">
+              <span>Taxes & Fees</span>
+              <span>₹1,000.00</span>
+            </div>
+            <div class="price-row total">
+              <span>Total</span>
+              <span>₹5,000.00</span>
+            </div>
+          </div>
+          
+          <button type="submit" class="btn btn-pay mt-4">
+            <i class="fas fa-lock me-2"></i> Proceed to Payment
+          </button>
+          
+          <div class="payment-info mt-3">
+            <i class="fas fa-shield-alt"></i> Your payment information is secure and encrypted
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    $(document).ready(function() {
+      const params = new URLSearchParams(window.location.search);
+      const flightId = params.get('flight_id');
+      
+      // Set the flight ID in the hidden field
+      document.getElementById('flight_id').value = flightId;
+      
+      // Mock flight data - in a real app, you would fetch this from the server
+      // based on the flight ID
+      const mockFlightDetail = {
+        destination: "New York",
+        date: "December 15, 2023",
+        time: "Departure: 08:30 AM - Arrival: 12:15 PM"
+      };
+      
+      // Update the flight summary
+      $('#flight-destination').text(`Flight to ${mockFlightDetail.destination}`);
+      $('#flight-date').text(`Date: ${mockFlightDetail.date}`);
+      $('#flight-time').text(`Time: ${mockFlightDetail.time}`);
+    });
+  </script>
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+
